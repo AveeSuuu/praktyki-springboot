@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class DbUserAccountRepository implements UserDataRepository {
+public class DbUserAccountRepository implements UserAccountRepository {
 
   private final JpaUserAccountRepository jpaUserAccountRepository;
 

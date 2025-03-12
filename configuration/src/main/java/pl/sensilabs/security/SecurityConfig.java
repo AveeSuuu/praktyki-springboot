@@ -23,7 +23,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
   private final JwtAuthFilter jwtAuthFilter;
-  private final UserDataRepository userDataRepository;
+  private final UserAccountRepository userAccountRepository;
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -63,6 +63,6 @@ public class SecurityConfig {
   }
 
   public UserDetailsService userDetailsService() {
-    return userDataRepository::loadUserByUsername;
+    return userAccountRepository::loadUserByUsername;
   }
 }

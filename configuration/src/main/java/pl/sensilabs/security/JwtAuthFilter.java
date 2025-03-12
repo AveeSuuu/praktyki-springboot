@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-  private final UserDataRepository userDataRepository;
+  private final UserAccountRepository userAccountRepository;
   private final JwtUtils jwtUtils;
 
   @Override
@@ -47,7 +47,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      var userDetails = userDataRepository.loadUserByUsername(username);
+      var userDetails = userAccountRepository.loadUserByUsername(username);
       final boolean isTokenValid = jwtUtils.isTokenValid(jwt, userDetails);
 
       log.info("Sprawdzenie tokena: username={}, valid={}", username, isTokenValid);

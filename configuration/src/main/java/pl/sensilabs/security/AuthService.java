@@ -13,11 +13,11 @@ public class AuthService {
 
   private final AuthenticationManager authenticationManager;
   private final BCryptPasswordEncoder encoder;
-  private final UserDataRepository userDataRepository;
+  private final UserAccountRepository userAccountRepository;
   private final JwtUtils jwtUtils;
 
   public String authenticateUserRequest(AuthRequest request) {
-    final var user = userDataRepository.loadUserByUsername(request.username());
+    final var user = userAccountRepository.loadUserByUsername(request.username());
     if (user == null) {
       throw new UserNotFoundException(request.username());
     }
@@ -30,7 +30,7 @@ public class AuthService {
   }
 
   public UserAccount registerNewUser(AuthRequest request) {
-    if (Boolean.TRUE.equals(userDataRepository.existsByUsername(request.username()))) {
+    if (Boolean.TRUE.equals(userAccountRepository.existsByUsername(request.username()))) {
       throw new UserAlreadyExistsException(request.username());
     }
 
@@ -38,7 +38,7 @@ public class AuthService {
         request.username(),
         encoder.encode(request.password()));
 
-    return userDataRepository.saveUserDetails(userdata);
+    return userAccountRepository.saveUserDetails(userdata);
   }
 }
 
