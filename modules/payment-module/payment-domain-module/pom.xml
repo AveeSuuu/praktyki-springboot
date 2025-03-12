@@ -5,38 +5,23 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pl.sensilabs</groupId>
-    <artifactId>applications</artifactId>
+    <artifactId>payment-module</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>system</artifactId>
+  <artifactId>payment-domain-module</artifactId>
 
   <properties>
     <maven.compiler.source>23</maven.compiler.source>
     <maven.compiler.target>23</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>pl.sensilabs</groupId>
-      <artifactId>order-rest-module</artifactId>
+      <artifactId>commons-domain</artifactId>
       <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>pl.sensilabs</groupId>
-      <artifactId>configuration</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>pl.sensilabs</groupId>
-      <artifactId>auth-rest-module</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>pl.sensilabs</groupId>
-      <artifactId>payment-rest-module</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 

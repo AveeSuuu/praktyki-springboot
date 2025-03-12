@@ -15,6 +15,7 @@
   <modules>
     <module>order-module</module>
     <module>auth-module</module>
+    <module>payment-module</module>
   </modules>
 
   <properties>

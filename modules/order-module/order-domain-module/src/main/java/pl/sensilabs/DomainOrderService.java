@@ -2,7 +2,9 @@ package pl.sensilabs;
 
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import pl.sensilabs.events.OrderPaidEvent;
 import pl.sensilabs.exceptions.OrderNotFoundException;
 
 @Service
@@ -12,6 +14,7 @@ public class DomainOrderService implements OrderService {
   private final OrderRepository orderRepository;
   private final BookOrderRepository bookOrderRepository;
   private final BookPriceFetcher bookPriceFetcher;
+  private final ApplicationEventPublisher publisher;
 
   @Override
   public UUID createOrder() {
@@ -52,6 +55,7 @@ public class DomainOrderService implements OrderService {
   public void payForOrder(UUID orderId) {
     var order = getOrderById(orderId);
     order.payForOrder();
+    publisher.publishEvent(new OrderPaidEvent(order.getOrderId(), order.getFinalPrice()));
     orderRepository.updateOrder(order);
   }
 

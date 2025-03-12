@@ -24,7 +24,7 @@ class DomainOrderServiceTest {
     orderService = new DomainOrderService(
         new MockOrderRepository(),
         new MockBookOrderRepository(bookPriceFetcher),
-        bookPriceFetcher);
+        bookPriceFetcher, null);
   }
 
   @Test
