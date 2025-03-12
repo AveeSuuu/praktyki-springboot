@@ -1,4 +1,4 @@
-package pl.sensilabs.security;
+package pl.sensilabs;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

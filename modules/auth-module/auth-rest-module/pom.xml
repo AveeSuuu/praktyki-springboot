@@ -5,21 +5,29 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pl.sensilabs</groupId>
-    <artifactId>Praktyki</artifactId>
+    <artifactId>auth-module</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>modules</artifactId>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>order-module</module>
-    <module>auth-module</module>
-  </modules>
+  <artifactId>auth-rest-module</artifactId>
 
   <properties>
     <maven.compiler.source>23</maven.compiler.source>
     <maven.compiler.target>23</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>pl.sensilabs</groupId>
+      <artifactId>auth-infrastructure-module</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>pl.sensilabs</groupId>
+      <artifactId>auth-domain-module</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
 </project>

@@ -1,4 +1,4 @@
-package pl.sensilabs.security;
+package pl.sensilabs;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

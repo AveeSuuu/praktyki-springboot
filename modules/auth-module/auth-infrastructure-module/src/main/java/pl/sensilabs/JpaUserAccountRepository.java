@@ -1,4 +1,4 @@
-package pl.sensilabs.security;
+package pl.sensilabs;
 
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

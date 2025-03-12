@@ -1,4 +1,4 @@
-package pl.sensilabs.security;
+package pl.sensilabs;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

@@ -1,4 +1,4 @@
-package pl.sensilabs.security;
+package pl.sensilabs;
 
 public class UserAlreadyExistsException extends RuntimeException {
   public UserAlreadyExistsException(String username) {

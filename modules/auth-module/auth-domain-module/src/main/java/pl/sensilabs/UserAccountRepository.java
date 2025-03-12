@@ -1,4 +1,4 @@
-package pl.sensilabs.security;
+package pl.sensilabs;
 
 public interface UserAccountRepository {
   UserAccount loadUserByUsername(String username);

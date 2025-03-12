@@ -17,4 +17,17 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>pl.sensilabs</groupId>
+      <artifactId>auth-domain-module</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>pl.sensilabs</groupId>
+      <artifactId>auth-infrastructure-module</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
 </project>
