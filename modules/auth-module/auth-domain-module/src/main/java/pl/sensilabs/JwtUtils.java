@@ -1,13 +1,16 @@
 package pl.sensilabs;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.Jwts.SIG;
+import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,6 +23,14 @@ public class JwtUtils {
 
   @Value("${security.jwt.expiration}")
   private Integer expiration;
+
+  private final JwtParser jwtParser;
+  private final SecretKey secretKey;
+
+  public JwtUtils() {
+    secretKey = Keys.hmacShaKeyFor(jwtSigningKey.getBytes());
+    jwtParser = Jwts.parser().verifyWith(secretKey).build();
+  }
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -40,7 +51,7 @@ public class JwtUtils {
   }
 
   private Claims extractAllClaims(String token) {
-    return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();
+    return jwtParser.parseSignedClaims(token).getPayload();
   }
 
   Boolean isTokenExpired(String token) {
@@ -53,12 +64,13 @@ public class JwtUtils {
   }
 
   private String createToken(Map<String, Object> claims, UserDetails userDetails) {
-    return Jwts.builder().setClaims(claims)
-        .setSubject(userDetails.getUsername())
+    return Jwts.builder()
+        .subject(userDetails.getUsername())
         .claim("authorities", userDetails.getAuthorities())
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(expiration)))
-        .signWith(SignatureAlgorithm.HS256, jwtSigningKey)
+        .claims(claims)
+        .issuedAt(new Date(System.currentTimeMillis()))
+        .expiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(expiration)))
+        .signWith(secretKey, SIG.HS256)
         .compact();
   }
 
