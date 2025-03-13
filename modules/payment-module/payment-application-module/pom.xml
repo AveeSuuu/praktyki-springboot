@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>payment-rest-module</artifactId>
+  <artifactId>payment-application-module</artifactId>
 
   <properties>
     <maven.compiler.source>23</maven.compiler.source>

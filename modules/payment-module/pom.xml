@@ -14,7 +14,7 @@
   <modules>
     <module>payment-domain-module</module>
     <module>payment-infrastructure-module</module>
-    <module>payment-rest-module</module>
+    <module>payment-application-module</module>
   </modules>
 
   <properties>
