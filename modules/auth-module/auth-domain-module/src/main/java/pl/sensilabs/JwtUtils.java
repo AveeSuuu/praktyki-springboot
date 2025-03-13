@@ -18,17 +18,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtils {
 
-  @Value("${security.jwt.secret-key}")
-  private String jwtSigningKey;
-
   @Value("${security.jwt.expiration}")
   private Integer expiration;
 
   private final JwtParser jwtParser;
   private final SecretKey secretKey;
 
-  public JwtUtils() {
-    secretKey = Keys.hmacShaKeyFor(jwtSigningKey.getBytes());
+  public JwtUtils(@Value("${security.jwt.secret-key}") String secret) {
+    secretKey = Keys.hmacShaKeyFor(secret.getBytes());
     jwtParser = Jwts.parser().verifyWith(secretKey).build();
   }
 
