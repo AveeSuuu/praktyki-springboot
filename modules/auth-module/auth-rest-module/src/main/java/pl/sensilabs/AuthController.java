@@ -1,5 +1,6 @@
 package pl.sensilabs;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,13 @@ public class AuthController {
   private final AuthService authService;
 
   @GetMapping
-  public ResponseEntity<String> authenticate(@RequestBody AuthRequest request) {
+  public ResponseEntity<String> authenticate(@RequestBody @Valid AuthRequest request) {
     log.info("Received request to authenticate user: {}", request);
     return ResponseEntity.ok(authService.authenticateUserRequest(request));
   }
 
   @PostMapping("/register")
-  public ResponseEntity<Void> registerNewUser(@RequestBody AuthRequest request) {
+  public ResponseEntity<Void> registerNewUser(@RequestBody @Valid AuthRequest request) {
     log.info("Received request to register new user: {}", request);
     return ResponseEntity.accepted().build();
   }

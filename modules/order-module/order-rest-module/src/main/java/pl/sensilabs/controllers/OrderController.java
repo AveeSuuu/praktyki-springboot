@@ -1,5 +1,6 @@
 package pl.sensilabs.controllers;
 
+import jakarta.validation.Valid;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ public class OrderController {
   @PostMapping("/{orderId}/add")
   public ResponseEntity<Void> addBookToOrder(
       @PathVariable UUID orderId,
-      @RequestBody BookAddRequest bookAddRequest) {
+      @RequestBody @Valid BookAddRequest bookAddRequest) {
     orderService.addBookToOrder(orderId, bookAddRequest.bookId(), bookAddRequest.quantity());
     return ResponseEntity.accepted().build();
   }
