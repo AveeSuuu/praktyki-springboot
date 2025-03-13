@@ -3,6 +3,8 @@ package pl.sensilabs;
 import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.Getter;
+import pl.sensilabs.events.OrderItemAddedEvent;
+import pl.sensilabs.events.OrderStatusChangedEvent;
 import pl.sensilabs.exceptions.InvalidOrderStateException;
 
 @Getter
@@ -26,51 +28,52 @@ public class Order {
     this.orderStatus = orderStatus;
   }
 
-  public void addBookToBasket(OrderItem item) {
+  public OrderItemAddedEvent addBookToBasket(OrderItem item) {
     if (!canAddProductToOrder()) {
       throw new InvalidOrderStateException("Order has already been finished and ready for payment");
     }
-
     basket.addOrderItem(item);
     finalPrice = basket.recalculateFinalPrice();
     orderStatus = OrderStatus.PROCESSING;
+    return new OrderItemAddedEvent(orderId, orderStatus, finalPrice, item);
   }
 
   private boolean canAddProductToOrder() {
     return orderStatus == OrderStatus.CONFIRMED || orderStatus == OrderStatus.PROCESSING;
   }
 
-  public void finishOrder() {
+  public OrderStatusChangedEvent finishOrder() {
     validateState(OrderStatus.PROCESSING, "Cannot finish empty order.");
-
     orderStatus = OrderStatus.AWAITING_PAYMENT;
+    return new OrderStatusChangedEvent(orderId, orderStatus);
   }
 
-  public void continueOrder() {
+  public OrderStatusChangedEvent continueOrder() {
     validateState(
-        OrderStatus.AWAITING_PAYMENT, "Cannot continue order that is unfinished, paid or shipped.");
-
+        OrderStatus.AWAITING_PAYMENT,
+        "Cannot continue order that is unfinished, paid or shipped.");
     orderStatus = OrderStatus.PROCESSING;
+    return new OrderStatusChangedEvent(orderId, orderStatus);
   }
 
-  public void payForOrder() {
+  public OrderStatusChangedEvent payForOrder() {
     validateState(OrderStatus.AWAITING_PAYMENT, "Cannot pay for unfinished order.");
-
     orderStatus = OrderStatus.PAID;
+    return new OrderStatusChangedEvent(orderId, orderStatus);
   }
 
-  public void shipOrder() {
+  public OrderStatusChangedEvent shipOrder() {
     validateState(OrderStatus.PAID, "Cannot ship order until its paid.");
-
     orderStatus = OrderStatus.SHIPPED;
+    return new OrderStatusChangedEvent(orderId, orderStatus);
   }
 
-  public void cancelOrder() {
+  public OrderStatusChangedEvent cancelOrder() {
     if (!canCancelOrder()) {
       throw new InvalidOrderStateException("Cannot cancel order awaiting for payment.");
     }
-
     orderStatus = OrderStatus.CANCELED;
+    return new OrderStatusChangedEvent(orderId, orderStatus);
   }
 
   private boolean canCancelOrder() {

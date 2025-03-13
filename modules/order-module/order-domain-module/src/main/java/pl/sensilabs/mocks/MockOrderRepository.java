@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.UUID;
 import pl.sensilabs.Order;
 import pl.sensilabs.OrderRepository;
+import pl.sensilabs.events.OrderItemAddedEvent;
+import pl.sensilabs.events.OrderStatusChangedEvent;
 
 public class MockOrderRepository implements OrderRepository {
 
@@ -25,14 +27,24 @@ public class MockOrderRepository implements OrderRepository {
   }
 
   @Override
-  public void updateOrder(Order order) {
-    if (orders.containsKey(order.getOrderId())) {
-      orders.put(order.getOrderId(), order);
-    }
+  public void apply(OrderItemAddedEvent event) {
+    findOrderById(event.orderId()).ifPresent(order ->
+        order.addBookToBasket(event.orderItem())
+    );
   }
 
   @Override
-  public void deleteOrder(UUID orderId) {
-    orders.remove(orderId);
+  public void apply(OrderStatusChangedEvent event) {
+    findOrderById(event.orderId()).ifPresent(order -> {
+      switch (event.status()) {
+        case AWAITING_PAYMENT -> order.finishOrder();
+        case PROCESSING -> order.continueOrder();
+        case PAID -> order.payForOrder();
+        case SHIPPED -> order.shipOrder();
+        case CANCELED -> order.cancelOrder();
+      }
+    });
   }
+
+
 }

@@ -40,7 +40,8 @@ public class OrderController {
   public ResponseEntity<Void> addBookToOrder(
       @PathVariable UUID orderId,
       @RequestBody @Valid BookAddRequest bookAddRequest) {
-    orderService.addBookToOrder(orderId, bookAddRequest.bookId(), bookAddRequest.quantity());
+    orderService.addBookToOrder(
+        orderId, UUID.fromString(bookAddRequest.bookId()), bookAddRequest.quantity());
     return ResponseEntity.accepted().build();
   }
 

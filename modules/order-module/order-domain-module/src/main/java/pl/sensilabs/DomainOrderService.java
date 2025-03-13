@@ -32,38 +32,38 @@ public class DomainOrderService implements OrderService {
     var order = getOrderById(orderId);
     var bookPrice = bookPriceFetcher.fetch(bookId).toString();
     var orderItem = new OrderItem(bookId, quantity, bookPrice);
-    order.addBookToBasket(orderItem);
+    var event = order.addBookToBasket(orderItem);
     bookOrderRepository.addBookOrder(orderId, bookId, quantity);
-    orderRepository.updateOrder(order);
+    orderRepository.apply(event);
   }
 
   @Override
   public void finishOrder(UUID orderId) {
     var order = getOrderById(orderId);
-    order.finishOrder();
-    orderRepository.updateOrder(order);
+    var event = order.finishOrder();
+    orderRepository.apply(event);
   }
 
   @Override
   public void continueOrder(UUID orderId) {
     var order = getOrderById(orderId);
-    order.continueOrder();
-    orderRepository.updateOrder(order);
+    var event = order.continueOrder();
+    orderRepository.apply(event);
   }
 
   @Override
   public void payForOrder(UUID orderId) {
     var order = getOrderById(orderId);
-    order.payForOrder();
+    var event = order.payForOrder();
     publisher.publishEvent(new OrderPaidEvent(order.getOrderId(), order.getFinalPrice()));
-    orderRepository.updateOrder(order);
+    orderRepository.apply(event);
   }
 
   @Override
   public void shipOrder(UUID orderId) {
     var order = getOrderById(orderId);
-    order.shipOrder();
-    orderRepository.updateOrder(order);
+    var event = order.shipOrder();
+    orderRepository.apply(event);
   }
 
   @Override
@@ -72,8 +72,8 @@ public class DomainOrderService implements OrderService {
     if (order.getOrderStatus() == OrderStatus.PAID) {
       refundPayment();
     }
-    order.cancelOrder();
-    orderRepository.updateOrder(order);
+    var event = order.cancelOrder();
+    orderRepository.apply(event);
   }
 
   void refundPayment() {

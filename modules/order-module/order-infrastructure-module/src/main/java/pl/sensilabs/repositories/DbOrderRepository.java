@@ -11,6 +11,8 @@ import pl.sensilabs.OrderBasket;
 import pl.sensilabs.OrderRepository;
 import pl.sensilabs.OrderStatus;
 import pl.sensilabs.entities.OrderEntity;
+import pl.sensilabs.events.OrderItemAddedEvent;
+import pl.sensilabs.events.OrderStatusChangedEvent;
 
 @Repository
 @RequiredArgsConstructor
@@ -38,19 +40,17 @@ public class DbOrderRepository implements OrderRepository {
 
   @Override
   @Transactional
-  public void updateOrder(Order order) {
-    jpaOrderRepository.findById(order.getOrderId()).ifPresent(o -> {
-      o.setFinalPrice(order.getFinalPrice());
-      o.setOrderStatus(order.getOrderStatus().toString());
+  public void apply(OrderItemAddedEvent event) {
+    jpaOrderRepository.findById(event.orderId()).ifPresent(order -> {
+      order.setOrderStatus(event.status().toString());
+      order.setFinalPrice(event.finalPrice());
     });
   }
 
   @Override
-  public void deleteOrder(UUID orderId) {
-    jpaOrderRepository.deleteById(orderId);
+  @Transactional
+  public void apply(OrderStatusChangedEvent event) {
+    jpaOrderRepository.findById(event.orderId()).ifPresent(order ->
+        order.setOrderStatus(event.status().toString()));
   }
 }
-
-//TODO pozmieniać nazwy w bazie danych i dodać ceny do książek
-//TODO dodać więcej możliwości w kontrollerze i DTO z mapperami
-//TODO może kontroller który w body przyjmuje polecenia będzie ciekawy :')
