@@ -5,21 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pl.sensilabs</groupId>
-    <artifactId>Praktyki</artifactId>
+    <artifactId>book-module</artifactId>
     <version>1.0.0</version>
   </parent>
 
-  <artifactId>modules</artifactId>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>auth-module</module>
-    <module>basket-module</module>
-    <module>order-module</module>
-    <module>payment-module</module>
-    <module>book-module</module>
-    <module>book-module/book-infrastructure-module</module>
-  </modules>
+  <artifactId>book-domain-module</artifactId>
 
   <properties>
     <maven.compiler.source>23</maven.compiler.source>

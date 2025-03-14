@@ -1,9 +1,12 @@
 package pl.sensilabs;
 
+import java.math.BigDecimal;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import pl.sensilabs.events.BookPriceRequestEvent;
 import pl.sensilabs.events.OrderPaidEvent;
 import pl.sensilabs.events.ProductAddedEvent;
 import pl.sensilabs.exceptions.OrderNotFoundException;
@@ -13,7 +16,6 @@ import pl.sensilabs.exceptions.OrderNotFoundException;
 public class OrderServiceImpl implements OrderService {
 
   private final OrderRepository orderRepository;
-  private final BookPriceFetcher bookPriceFetcher;
   private final ApplicationEventPublisher publisher;
 
   @Override
@@ -32,9 +34,12 @@ public class OrderServiceImpl implements OrderService {
   public void addBookToOrder(UUID orderId, UUID bookId, int quantity) {
     publisher.publishEvent(new ProductAddedEvent(orderId, bookId, quantity));
     var order = getOrderById(orderId);
-    var bookPrice = bookPriceFetcher.fetch(bookId);
-    var event = order.addBookToBasket(bookPrice, quantity);
-    orderRepository.apply(event);
+    var bookPrice = new CompletableFuture<BigDecimal>();
+    publisher.publishEvent(new BookPriceRequestEvent(bookId, bookPrice));
+    bookPrice.whenComplete((price, throwable) -> {
+      var event = order.addBookToBasket(price, quantity);
+      orderRepository.apply(event);
+    });
   }
 
   @Override

@@ -5,20 +5,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pl.sensilabs</groupId>
-    <artifactId>Praktyki</artifactId>
+    <artifactId>modules</artifactId>
     <version>1.0.0</version>
   </parent>
 
-  <artifactId>modules</artifactId>
+  <artifactId>book-module</artifactId>
   <packaging>pom</packaging>
-
   <modules>
-    <module>auth-module</module>
-    <module>basket-module</module>
-    <module>order-module</module>
-    <module>payment-module</module>
-    <module>book-module</module>
-    <module>book-module/book-infrastructure-module</module>
+    <module>book-domain-module</module>
+    <module>book-application-module</module>
+    <module>book-infrastructure-module</module>
   </modules>
 
   <properties>

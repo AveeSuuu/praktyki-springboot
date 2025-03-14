@@ -1,4 +1,4 @@
-package pl.sensilabs.entities;
+package pl.sensilabs;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

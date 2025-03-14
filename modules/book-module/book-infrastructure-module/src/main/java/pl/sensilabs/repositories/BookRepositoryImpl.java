@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.sensilabs.BookPriceFetcher;
+import pl.sensilabs.BookRepository;
 
 @Repository
 @RequiredArgsConstructor
-public class BookPriceFetcherImpl implements BookPriceFetcher {
+public class BookRepositoryImpl implements BookRepository {
 
   private final BookRepositoryJpa jpaBookRepository;
 
   @Override
-  public BigDecimal fetch(UUID bookId) {
+  public BigDecimal fetchPrice(UUID bookId) {
     return jpaBookRepository.findByBookId(bookId).getPrice();
   }
 }

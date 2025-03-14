@@ -57,8 +57,6 @@ public class OrderController {
     return ResponseEntity.accepted().build();
   }
 
-  //myślałem nad utworzeniem mikro-serwisu do zarządzania płatnościami,
-  //ale nie chcę aż tak daleko wychodzić z materiałem.
   @PostMapping("/{orderId}/pay")
   public ResponseEntity<Void> payForOrder(@PathVariable UUID orderId) {
     orderService.payForOrder(orderId);

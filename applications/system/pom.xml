@@ -43,6 +43,16 @@
         <artifactId>order-rest-module</artifactId>
         <version>1.0.0</version>
       </dependency>
+      <dependency>
+        <groupId>pl.sensilabs</groupId>
+        <artifactId>book-application-module</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>pl.sensilabs</groupId>
+        <artifactId>book-infrastructure-module</artifactId>
+        <version>1.0.0</version>
+      </dependency>
     </dependencies>
 
 </project>

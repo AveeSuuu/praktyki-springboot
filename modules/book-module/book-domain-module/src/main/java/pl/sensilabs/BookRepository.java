@@ -3,7 +3,7 @@ package pl.sensilabs;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public interface BookPriceFetcher {
+public interface BookRepository {
 
-  BigDecimal fetch(UUID bookId);
+  BigDecimal fetchPrice(UUID bookId);
 }
