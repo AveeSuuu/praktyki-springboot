@@ -6,7 +6,7 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>payment-module</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>payment-infrastructure-module</artifactId>
@@ -17,12 +17,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>pl.sensilabs</groupId>
-      <artifactId>payment-domain-module</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>pl.sensilabs</groupId>
+        <artifactId>payment-domain-module</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+    </dependencies>
 
 </project>

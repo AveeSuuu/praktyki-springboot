@@ -6,7 +6,7 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>auth-module</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>auth-domain-module</artifactId>

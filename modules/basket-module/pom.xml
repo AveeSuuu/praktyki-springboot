@@ -6,7 +6,7 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>modules</artifactId>
-    <version>{version}</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>basket-module</artifactId>
@@ -23,14 +23,5 @@
     <maven.compiler.target>23</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>pl.sensilabs</groupId>
-        <artifactId>commons-domain</artifactId>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
 </project>

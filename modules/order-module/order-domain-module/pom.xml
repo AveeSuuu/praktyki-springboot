@@ -6,7 +6,7 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>order-module</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>order-domain-module</artifactId>
@@ -16,12 +16,21 @@
     <maven.compiler.target>23</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <dependencyManagement>
+
+    <dependencies>
+      <dependency>
+        <groupId>pl.sensilabs</groupId>
+        <artifactId>commons-domain</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>pl.sensilabs</groupId>
       <artifactId>commons-domain</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
 

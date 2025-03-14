@@ -6,7 +6,7 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>basket-module</artifactId>
-    <version>{version}</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>basket-infrastructure-module</artifactId>
@@ -17,17 +17,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>pl.sensilabs</groupId>
         <artifactId>basket-domain-module</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>pl.sensilabs</groupId>
-        <artifactId>basket-infrastructure-module</artifactId>
+        <version>1.0.0</version>
       </dependency>
     </dependencies>
-  </dependencyManagement>
 
 </project>

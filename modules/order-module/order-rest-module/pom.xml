@@ -6,7 +6,7 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>order-module</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>order-rest-module</artifactId>
@@ -21,12 +21,7 @@
     <dependency>
       <groupId>pl.sensilabs</groupId>
       <artifactId>order-infrastructure-module</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>pl.sensilabs</groupId>
-      <artifactId>order-domain-module</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 

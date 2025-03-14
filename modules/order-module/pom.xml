@@ -6,11 +6,12 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>modules</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>order-module</artifactId>
   <packaging>pom</packaging>
+
   <modules>
     <module>order-rest-module</module>
     <module>order-infrastructure-module</module>

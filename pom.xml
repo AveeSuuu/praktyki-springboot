@@ -9,10 +9,12 @@
     <version>3.4.3</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
+
   <groupId>pl.sensilabs</groupId>
   <artifactId>Praktyki</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
+
   <name>Praktyki</name>
   <description>Praktyki</description>
 
@@ -26,6 +28,7 @@
   <properties>
     <java.version>23</java.version>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -35,7 +38,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>

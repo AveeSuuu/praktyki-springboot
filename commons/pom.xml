@@ -6,11 +6,12 @@
   <parent>
     <groupId>pl.sensilabs</groupId>
     <artifactId>Praktyki</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>commons</artifactId>
   <packaging>pom</packaging>
+
   <modules>
     <module>commons-domain</module>
     <module>commons-infrastructure</module>
