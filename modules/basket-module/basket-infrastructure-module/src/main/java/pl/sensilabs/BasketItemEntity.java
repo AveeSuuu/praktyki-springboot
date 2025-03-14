@@ -1,4 +1,4 @@
-package pl.sensilabs.entities;
+package pl.sensilabs;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "books_orders")
-public class BookOrderEntity {
+public class BasketItemEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,7 +25,7 @@ public class BookOrderEntity {
   UUID orderId;
   Integer quantity;
 
-  public BookOrderEntity(UUID bookId, UUID orderId, Integer quantity) {
+  public BasketItemEntity(UUID bookId, UUID orderId, Integer quantity) {
     this.bookId = bookId;
     this.orderId = orderId;
     this.quantity = quantity;

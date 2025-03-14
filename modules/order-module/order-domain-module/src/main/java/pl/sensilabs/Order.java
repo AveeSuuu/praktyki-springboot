@@ -1,9 +1,10 @@
 package pl.sensilabs;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.UUID;
 import lombok.Getter;
-import pl.sensilabs.events.OrderItemAddedEvent;
+import pl.sensilabs.events.BookAddedToOrderEvent;
 import pl.sensilabs.events.OrderStatusChangedEvent;
 import pl.sensilabs.exceptions.InvalidOrderStateException;
 
@@ -11,35 +12,37 @@ import pl.sensilabs.exceptions.InvalidOrderStateException;
 public class Order {
 
   private UUID orderId;
-  private final OrderBasket basket;
   private BigDecimal finalPrice;
   private OrderStatus orderStatus;
 
   public Order() {
-    basket = new OrderBasket();
     finalPrice = BigDecimal.ZERO;
     orderStatus = OrderStatus.CONFIRMED;
   }
 
-  public Order(UUID orderId, OrderBasket basket, OrderStatus orderStatus) {
+  public Order(UUID orderId, BigDecimal finalPrice, OrderStatus orderStatus) {
     this.orderId = orderId;
-    this.basket = basket;
-    this.finalPrice = basket.recalculateFinalPrice();
+    this.finalPrice = finalPrice;
     this.orderStatus = orderStatus;
   }
 
-  public OrderItemAddedEvent addBookToBasket(OrderItem item) {
+  public BookAddedToOrderEvent addBookToBasket(BigDecimal price, int quantity) {
     if (!canAddProductToOrder()) {
       throw new InvalidOrderStateException("Order has already been finished and ready for payment");
     }
-    basket.addOrderItem(item);
-    finalPrice = basket.recalculateFinalPrice();
     orderStatus = OrderStatus.PROCESSING;
-    return new OrderItemAddedEvent(orderId, orderStatus, finalPrice, item);
+    recalculateFinalPrice(price, quantity);
+    return new BookAddedToOrderEvent(orderId, orderStatus, finalPrice);
   }
 
   private boolean canAddProductToOrder() {
     return orderStatus == OrderStatus.CONFIRMED || orderStatus == OrderStatus.PROCESSING;
+  }
+
+  private void recalculateFinalPrice(BigDecimal price, int quantity) {
+    this.finalPrice = this.finalPrice
+        .add(price.multiply(BigDecimal.valueOf(quantity)))
+        .setScale(2, RoundingMode.HALF_UP);
   }
 
   public OrderStatusChangedEvent finishOrder() {

@@ -8,13 +8,16 @@ import jakarta.persistence.Table;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "user_accounts")
 @NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "user_accounts")
 public class UserAccount implements UserDetails {
 
   @Id

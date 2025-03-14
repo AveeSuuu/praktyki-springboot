@@ -15,7 +15,7 @@ public class PaymentEventListener {
   private final PaymentService paymentService;
 
   @EventListener
-  public void onOrderPaid(OrderPaidEvent orderPaidEvent) {
+  void onOrderPaid(OrderPaidEvent orderPaidEvent) {
     log.info("Received OrderPaid event for order: {}", orderPaidEvent.orderId());
     paymentService.registerPayment(orderPaidEvent.orderId(), orderPaidEvent.price());
   }

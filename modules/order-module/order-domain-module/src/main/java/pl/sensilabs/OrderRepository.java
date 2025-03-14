@@ -2,7 +2,7 @@ package pl.sensilabs;
 
 import java.util.Optional;
 import java.util.UUID;
-import pl.sensilabs.events.OrderItemAddedEvent;
+import pl.sensilabs.events.BookAddedToOrderEvent;
 import pl.sensilabs.events.OrderStatusChangedEvent;
 
 public interface OrderRepository {
@@ -11,7 +11,7 @@ public interface OrderRepository {
 
   UUID saveOrder(Order order);
 
-  void apply(OrderItemAddedEvent event);
+  void apply(BookAddedToOrderEvent event);
 
   void apply(OrderStatusChangedEvent event);
 }

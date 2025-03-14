@@ -10,7 +10,7 @@ import pl.sensilabs.BookPriceFetcher;
 @RequiredArgsConstructor
 public class BookPriceFetcherImpl implements BookPriceFetcher {
 
-  private final BookOrderRepositoryJpa jpaBookRepository;
+  private final BookRepositoryJpa jpaBookRepository;
 
   @Override
   public BigDecimal fetch(UUID bookId) {

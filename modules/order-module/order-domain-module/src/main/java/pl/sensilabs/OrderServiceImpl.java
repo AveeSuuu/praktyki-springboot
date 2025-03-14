@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import pl.sensilabs.events.OrderPaidEvent;
+import pl.sensilabs.events.ProductAddedEvent;
 import pl.sensilabs.exceptions.OrderNotFoundException;
 
 @Service
@@ -12,13 +13,13 @@ import pl.sensilabs.exceptions.OrderNotFoundException;
 public class OrderServiceImpl implements OrderService {
 
   private final OrderRepository orderRepository;
-  private final BookOrderRepository bookOrderRepository;
   private final BookPriceFetcher bookPriceFetcher;
   private final ApplicationEventPublisher publisher;
 
   @Override
   public UUID createOrder() {
-    return orderRepository.saveOrder(new Order());
+    var order = new Order();
+    return orderRepository.saveOrder(order);
   }
 
   @Override
@@ -29,11 +30,10 @@ public class OrderServiceImpl implements OrderService {
 
   @Override
   public void addBookToOrder(UUID orderId, UUID bookId, int quantity) {
+    publisher.publishEvent(new ProductAddedEvent(orderId, bookId, quantity));
     var order = getOrderById(orderId);
-    var bookPrice = bookPriceFetcher.fetch(bookId).toString();
-    var orderItem = new OrderItem(bookId, quantity, bookPrice);
-    var event = order.addBookToBasket(orderItem);
-    bookOrderRepository.addBookOrder(orderId, bookId, quantity);
+    var bookPrice = bookPriceFetcher.fetch(bookId);
+    var event = order.addBookToBasket(bookPrice, quantity);
     orderRepository.apply(event);
   }
 

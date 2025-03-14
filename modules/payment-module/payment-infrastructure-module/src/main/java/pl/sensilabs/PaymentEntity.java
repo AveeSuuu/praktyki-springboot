@@ -1,6 +1,8 @@
 package pl.sensilabs;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
@@ -19,6 +21,7 @@ import lombok.Setter;
 public class PaymentEntity {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
   private UUID paymentId;
   private UUID orderId;
   private LocalDate receiveDate; //powinien być dateTime :clown:
