@@ -9,7 +9,7 @@ import pl.sensilabs.OrderRepository;
 import pl.sensilabs.events.OrderItemAddedEvent;
 import pl.sensilabs.events.OrderStatusChangedEvent;
 
-public class MockOrderRepository implements OrderRepository {
+public class OrderRepositoryMock implements OrderRepository {
 
   Map<UUID, Order> orders = new HashMap<>();
 

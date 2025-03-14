@@ -12,7 +12,7 @@ import pl.sensilabs.entities.BookOrder;
 
 @Repository
 @RequiredArgsConstructor
-public class DbBookOrderRepository implements BookOrderRepository {
+public class BookOrderRepositoryImpl implements BookOrderRepository {
 
   private final JpaBookOrderRepository jpaBookOrderRepository;
   private final BookPriceFetcher bookPriceFetcher;

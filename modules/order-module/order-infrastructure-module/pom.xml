@@ -24,12 +24,6 @@
       <artifactId>order-domain-module</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>pl.sensilabs</groupId>
-      <artifactId>commons-infrastructure</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 
 </project>

@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.UUID;
 import pl.sensilabs.BookPriceFetcher;
 
-public class MockBookPriceFetcher implements BookPriceFetcher {
+public class BookPriceFetcherMock implements BookPriceFetcher {
 
   Map<UUID, BigDecimal> bookPrices = new HashMap<>();
   Random random = new Random();

@@ -10,15 +10,15 @@ import pl.sensilabs.Order;
 import pl.sensilabs.OrderBasket;
 import pl.sensilabs.OrderRepository;
 import pl.sensilabs.OrderStatus;
-import pl.sensilabs.entities.OrderEntity;
+import pl.sensilabs.OrderEntity;
 import pl.sensilabs.events.OrderItemAddedEvent;
 import pl.sensilabs.events.OrderStatusChangedEvent;
 
 @Repository
 @RequiredArgsConstructor
-public class DbOrderRepository implements OrderRepository {
+public class OrderRepositoryImpl implements OrderRepository {
 
-  private final JpaOrderRepository jpaOrderRepository;
+  private final OrderRepositoryJpa jpaOrderRepository;
   private final BookOrderRepository bookOrderRepository;
 
   @Override

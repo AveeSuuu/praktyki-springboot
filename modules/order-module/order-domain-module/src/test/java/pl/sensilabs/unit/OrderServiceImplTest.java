@@ -7,23 +7,23 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import pl.sensilabs.BookPriceFetcher;
-import pl.sensilabs.DomainOrderService;
+import pl.sensilabs.OrderServiceImpl;
 import pl.sensilabs.OrderService;
 import pl.sensilabs.exceptions.InvalidOrderStateException;
-import pl.sensilabs.mocks.MockBookOrderRepository;
-import pl.sensilabs.mocks.MockBookPriceFetcher;
-import pl.sensilabs.mocks.MockOrderRepository;
+import pl.sensilabs.mocks.BookOrderRepositoryMock;
+import pl.sensilabs.mocks.BookPriceFetcherMock;
+import pl.sensilabs.mocks.OrderRepositoryMock;
 
-class DomainOrderServiceTest {
+class OrderServiceImplTest {
 
   private final BookPriceFetcher bookPriceFetcher;
   private final OrderService orderService;
 
-  public DomainOrderServiceTest() {
-    bookPriceFetcher = new MockBookPriceFetcher();
-    orderService = new DomainOrderService(
-        new MockOrderRepository(),
-        new MockBookOrderRepository(bookPriceFetcher),
+  public OrderServiceImplTest() {
+    bookPriceFetcher = new BookPriceFetcherMock();
+    orderService = new OrderServiceImpl(
+        new OrderRepositoryMock(),
+        new BookOrderRepositoryMock(bookPriceFetcher),
         bookPriceFetcher, null);
   }
 

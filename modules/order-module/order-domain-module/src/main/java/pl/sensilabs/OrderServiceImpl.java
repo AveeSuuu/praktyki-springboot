@@ -9,7 +9,7 @@ import pl.sensilabs.exceptions.OrderNotFoundException;
 
 @Service
 @RequiredArgsConstructor
-public class DomainOrderService implements OrderService {
+public class OrderServiceImpl implements OrderService {
 
   private final OrderRepository orderRepository;
   private final BookOrderRepository bookOrderRepository;

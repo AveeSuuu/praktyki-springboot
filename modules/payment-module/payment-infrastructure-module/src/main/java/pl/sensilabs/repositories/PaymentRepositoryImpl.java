@@ -5,13 +5,13 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.sensilabs.PaymentRepository;
-import pl.sensilabs.entities.PaymentEntity;
+import pl.sensilabs.PaymentEntity;
 
 @Repository
 @RequiredArgsConstructor
-public class DbPaymentRepository implements PaymentRepository {
+public class PaymentRepositoryImpl implements PaymentRepository {
 
-  private final JpaPaymentRepository jpaPaymentRepository;
+  private final PaymentRepositoryJpa jpaPaymentRepository;
 
   @Override
   public void savePayment(UUID orderId, BigDecimal price) {

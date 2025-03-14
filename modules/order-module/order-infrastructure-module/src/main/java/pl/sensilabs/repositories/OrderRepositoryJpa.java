@@ -3,9 +3,9 @@ package pl.sensilabs.repositories;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.sensilabs.entities.PaymentEntity;
+import pl.sensilabs.OrderEntity;
 
 @Repository
-public interface JpaPaymentRepository extends JpaRepository<PaymentEntity, UUID> {
+public interface OrderRepositoryJpa extends JpaRepository<OrderEntity, UUID> {
 
 }

@@ -9,12 +9,12 @@ import pl.sensilabs.BookOrderRepository;
 import pl.sensilabs.BookPriceFetcher;
 import pl.sensilabs.OrderItem;
 
-public class MockBookOrderRepository implements BookOrderRepository {
+public class BookOrderRepositoryMock implements BookOrderRepository {
 
   private final Map<UUID, Set<OrderItem>> orderItems = new HashMap<>();
   private final BookPriceFetcher bookPriceFetcher;
 
-  public MockBookOrderRepository(BookPriceFetcher bookPriceFetcher) {
+  public BookOrderRepositoryMock(BookPriceFetcher bookPriceFetcher) {
     this.bookPriceFetcher = bookPriceFetcher;
   }
 

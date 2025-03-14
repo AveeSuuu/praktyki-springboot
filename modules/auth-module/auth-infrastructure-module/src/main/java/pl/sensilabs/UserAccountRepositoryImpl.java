@@ -5,22 +5,22 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class DbUserAccountRepository implements UserAccountRepository {
+public class UserAccountRepositoryImpl implements UserAccountRepository {
 
-  private final JpaUserAccountRepository jpaUserAccountRepository;
+  private final UserAccountRepositoryJpa userAccountRepositoryJpa;
 
   @Override
   public UserAccount loadUserByUsername(String username) {
-    return jpaUserAccountRepository.findByUsername(username);
+    return userAccountRepositoryJpa.findByUsername(username);
   }
 
   @Override
   public UserAccount saveUserDetails(UserAccount userAccount) {
-    return jpaUserAccountRepository.save(userAccount);
+    return userAccountRepositoryJpa.save(userAccount);
   }
 
   @Override
   public Boolean existsByUsername(String username) {
-    return jpaUserAccountRepository.existsByUsername(username);
+    return userAccountRepositoryJpa.existsByUsername(username);
   }
 }
